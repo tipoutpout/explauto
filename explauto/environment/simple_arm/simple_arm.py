@@ -1,5 +1,5 @@
 import numpy as np
-
+from numpy import array, pi, sqrt, cos, sin, linspace, zeros, random
 from ..environment import Environment
 from ...utils import bounds_min_max
 
@@ -71,6 +71,9 @@ class SimpleArmEnvironment(Environment):
         hand_pos += self.noise * np.random.randn(*hand_pos.shape)
         return hand_pos
 
+    def reset(self):
+        return NotImplementedError
+
     def plot(self, ax, m, s, **kwargs_plot):
         self.plot_arm(ax, m, **kwargs_plot)
 
@@ -83,3 +86,18 @@ class SimpleArmEnvironment(Environment):
         ax.axis([self.conf.s_mins[0], self.conf.s_maxs[0], self.conf.s_mins[1], self.conf.s_maxs[1]])
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
+
+    def test_case(self, n_samples=200):
+        # tests = zeros((n_samples, 2))
+        # #FIXME low_dimensional
+        # if config_str in ('high_dimensional', 'high_dim_high_s_range'):
+        #     i = 0
+        #     for r, theta in array([1., 2*pi]) * random.rand(n_samples, 2) + array([0., -pi]):
+        #         tests[i, :] = sqrt(r) * array([cos(theta), sin(theta)])
+        #         i += 1
+        #     return tests
+        #
+        # else:
+        #     env = environment(**configurations[config_str])
+        #     env.noise = 0.
+        return self.uniform_sensor(n_samples)

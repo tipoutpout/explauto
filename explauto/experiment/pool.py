@@ -7,7 +7,6 @@ from numpy import random
 
 from . import make_settings
 from .experiment import Experiment
-from ..environment import environments
 
 
 def _f(args):
@@ -51,8 +50,8 @@ class ExperimentPool(object):
                               testcases=None, same_testcases=False):
         """ Creates a ExperimentPool with the product of all the given settings.
 
-            :param environments: e.g. [('simple_arm', 'default'), ('simple_arm', 'high_dimensional')]
-            :type environments: list of (environment name, config name)
+            :param environments: liste of environment
+            :type environments: list of instance of Environment
             :param babblings: e.g. ['motor', 'goal']
             :type bablings: list of babbling modes
             :param interest_models: e.g. [('random', 'default')]
@@ -67,8 +66,8 @@ class ExperimentPool(object):
         l = itertools.product(environments, babblings,
                               interest_models, sensorimotor_models)
 
-        settings = [make_settings(env, bab, im, sm, env_conf, im_conf, sm_conf)
-                    for ((env, env_conf), bab, (im, im_conf), (sm, sm_conf)) in l]
+        settings = [make_settings(env, bab, im, sm, im_conf, sm_conf)
+                    for (env, bab, (im, im_conf), (sm, sm_conf)) in l]
 
         return cls(settings, evaluate_at, testcases, same_testcases)
 
@@ -82,7 +81,7 @@ class ExperimentPool(object):
          """
         mega_config = [c for c in self._config for _ in range(repeat)]
 
-        env = [environments[s.environment][0] for s in self.settings]
+        env = [s.environment for s in self.settings]
         use_process = array([e.use_process for e in env]).all() and (not use_thread)
 
         pool = Pool(processes) if use_process else ThreadPool(processes)

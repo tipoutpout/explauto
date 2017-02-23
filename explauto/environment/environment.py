@@ -7,8 +7,6 @@ from ..utils.observer import Observable
 from ..utils import rand_bounds
 from .testcase import Lattice
 
-from . import environments
-
 class Environment(Observable):
     """ Abstract class to define environments.
 
@@ -26,44 +24,6 @@ class Environment(Observable):
         Observable.__init__(self)
 
         self.conf = make_configuration(m_mins, m_maxs, s_mins, s_maxs)
-
-    @classmethod
-    def from_configuration(cls, env_name, config_name='default'):
-        """ Environment factory from name and configuration strings.
-
-        :param str env_name: the name string of the environment
-
-        :param str config_name: the configuration string for env_name
-
-        Environment name strings are available using::
-
-            from explauto.environment import environments
-            print environments.keys()
-
-        This will return the available environment names, something like::
-
-            '['npendulum', 'pendulum', 'simple_arm']'
-
-        Once you have choose an environment, e.g. 'simple_arm', corresponding available configurations are available using::
-
-            env_cls, env_configs, _ = environments['simple_arm']
-            print env_configs.keys()
-
-        This will return the available configuration names for the 'simple_arm' environment, something like::
-
-            '['mid_dimensional', 'default', 'high_dim_high_s_range', 'low_dimensional', 'high_dimensional']'
-
-        Once you have choose a configuration, for example the 'mid_dimensional' one, you can contruct the environment using::
-
-            from explauto import Environment
-            my_environment = Environment.from_configuration('simple_arm', 'mid_dimensional')
-
-        Or, in an equivalent manner::
-
-            my_environment = env_cls(**env_configs['mid_dimensional'])
-        """
-        env_cls, env_configs, _ = environments[env_name]
-        return env_cls(**env_configs[config_name])
 
     def one_update(self, m_ag, log=True):
         m_env = self.compute_motor_command(m_ag)
@@ -98,17 +58,18 @@ class Environment(Observable):
             s = array(s)
         return s
 
+    @abstractmethod
     def reset(self):
         """ reset environment before update """
-        pass
+        return
 
     @abstractmethod
     def compute_motor_command(self, ag_state):
-        raise NotImplementedError
+        return
 
     @abstractmethod
     def compute_sensori_effect(self):
-        raise NotImplementedError
+        return
 
     def random_motors(self, n=1):
         return rand_bounds(self.conf.bounds[:, self.conf.m_dims], n)
@@ -133,6 +94,11 @@ class Environment(Observable):
         for ms in list(lattice.grid.values()):
             result.append(ms[1])
         return array(result)
-    
+
+    @abstractmethod
     def plot(self, ax, m, s, **kwargs):
-        pass
+        return
+
+    @abstractmethod
+    def test_case(self, n_samples):
+        return

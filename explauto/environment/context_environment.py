@@ -8,14 +8,14 @@ from ..utils import rand_bounds
 
 class ContextEnvironment(Environment):
 
-    def __init__(self, env_cls, env_conf, context_mode):
-        self.context_mode = context_mode        
-        self.env = env_cls(**env_conf)          
+    def __init__(self, env, context_mode):
+        self.context_mode = context_mode
+        self.env = env
         
         
         if self.context_mode["mode"] == 'mdmsds':
-            Environment.__init__(self, 
-                                np.hstack((self.env.conf.m_mins, self.context_mode['dm_bounds'][0])), 
+            Environment.__init__(self,
+                                np.hstack((self.env.conf.m_mins, self.context_mode['dm_bounds'][0])),
                                 np.hstack((self.env.conf.m_maxs, self.context_mode['dm_bounds'][1])),
                                 np.hstack((self.env.conf.s_mins, self.context_mode['ds_bounds'][0])),
                                 np.hstack((self.env.conf.s_maxs, self.context_mode['ds_bounds'][1])))

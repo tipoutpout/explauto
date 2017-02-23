@@ -11,7 +11,6 @@ from ..evaluation import Evaluation
 
 from ..agent import Agent
 from .log import ExperimentLog
-from ..environment import environments
 from ..interest_model import interest_models
 from ..sensorimotor_model import sensorimotor_models
 from ..environment.context_environment import ContextEnvironment
@@ -170,13 +169,11 @@ class Experiment(Observer):
     @classmethod
     def from_settings(cls, settings):
         """ Creates a :class:`~explauto.experiment.experiment.Experiment` object thanks to the given settings. """
-        env_cls, env_configs, _ = environments[settings.environment]
-        config = env_configs[settings.environment_config]
 
         if settings.context_mode is None:
-            env = env_cls(**config)
+            env = settings.environment
         else:
-            env = ContextEnvironment(env_cls, config, settings.context_mode)
+            env = ContextEnvironment(settings.environment, settings.context_mode)
 
         im_cls, im_configs = interest_models[settings.interest_model]
         sm_cls, sm_configs = sensorimotor_models[settings.sensorimotor_model]

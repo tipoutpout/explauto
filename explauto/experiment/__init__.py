@@ -1,10 +1,8 @@
 from collections import namedtuple
 
-from ..environment import environments
 
 
 class Settings(namedtuple('Settings', ('environment',
-                                       'environment_config',
                                        'babbling_mode',
                                        'interest_model',
                                        'interest_model_config',
@@ -13,18 +11,17 @@ class Settings(namedtuple('Settings', ('environment',
                                        'context_mode'))):
     @property
     def default_testcases(self):
-        return environments[self.environment][2](self.environment_config)
+        return self.environment.test_case()
 
 
 def make_settings(environment,
                   babbling_mode,
                   interest_model, sensorimotor_model,
-                  environment_config='default',
                   interest_model_config='default',
                   sensorimotor_model_config='default',
                   context_mode=None):
 
-    return Settings(environment, environment_config,
+    return Settings(environment,
                     babbling_mode,
                     interest_model, interest_model_config,
                     sensorimotor_model, sensorimotor_model_config, context_mode)
