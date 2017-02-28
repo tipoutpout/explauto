@@ -2,7 +2,7 @@ from numpy import array, pi, sqrt, cos, sin, linspace, zeros
 
 
 from .simple_arm import SimpleArmEnvironment
-
+from .simple_arm_with_cloud import SimpleArmWithCloud
 
 def make_arm_config(m_ndims, m_max, s_mins, s_maxs, length_ratio, noise):
     return dict(m_mins=array([-m_max] * m_ndims),
