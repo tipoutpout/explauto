@@ -127,8 +127,6 @@ class MiscRandomInterest(RandomInterest):
 
 
 
-interest_models = {'random': (RandomInterest, {'default': {}}),
-                   'misc_random': (MiscRandomInterest, {'default': 
-                                   {'competence_measure': competence_dist,
-                                    'win_size': 100}})}
+random_config = {'default': {}}
+misc_random_config={'default':{'competence_measure': competence_dist,     'win_size': 100}}
 

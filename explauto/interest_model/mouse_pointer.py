@@ -1,7 +1,7 @@
 from numpy import array
 
 from .interest_model import InterestModel
-from ..io.mouse_pointer import MousePointer as MP
+from ..ioExplauto.mouse_pointer import MousePointer as MP
 
 
 class MousePointer(InterestModel):
@@ -15,6 +15,4 @@ class MousePointer(InterestModel):
     def update(xy, ms):
         pass
 
-interest_models = {'mouse_pointer_beta': (MousePointer,
-                                         {'default': {'width': 320,
-                                                      'height': 240}})}
+mopurse_pointer_config = {'default': {'width': 320,'height': 240}}

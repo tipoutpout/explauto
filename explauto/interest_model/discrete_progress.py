@@ -126,8 +126,4 @@ class DiscreteProgress(InterestModel):
                             
 
 
-interest_models = {'discretized_progress': (DiscretizedProgress,
-                                            {'default': {'x_card': 400,
-                                                         'win_size': 10,
-                                                         'eps_random': 0.3,
-                                                         'measure': competence_dist}})}
+discretized_progress_config = {'default': {'x_card': 400, 'win_size': 10,'eps_random': 0.3,'measure': competence_dist}}

@@ -53,8 +53,7 @@ class Agent(Observable):
         conf = make_configuration(m_mins, m_maxs, s_mins, s_maxs)
 
         sm_model = sm_model_cls(conf, **sm_model_config)
-        im_model = im_model_cls(conf, expl_dims,
-                                           **im_model_config)
+        im_model = im_model_cls(conf, expl_dims,**im_model_config)
 
         return cls(conf, sm_model, im_model, n_bootstrap, context_mode)
 

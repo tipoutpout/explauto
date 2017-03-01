@@ -4,7 +4,7 @@ from collections import namedtuple
 
 class Settings(namedtuple('Settings', ('environment',
                                        'babbling_mode',
-                                       'interest_model',
+                                       'interest_model_class',
                                        'interest_model_config',
                                        'sensorimotor_model',
                                        'sensorimotor_model_config',
@@ -16,14 +16,14 @@ class Settings(namedtuple('Settings', ('environment',
 
 def make_settings(environment,
                   babbling_mode,
-                  interest_model, sensorimotor_model,
+                  interest_model_class, sensorimotor_model,
                   interest_model_config='default',
                   sensorimotor_model_config='default',
                   context_mode=None):
 
     return Settings(environment,
                     babbling_mode,
-                    interest_model, interest_model_config,
+                    interest_model_class, interest_model_config,
                     sensorimotor_model, sensorimotor_model_config, context_mode)
 
 from .experiment import Experiment
