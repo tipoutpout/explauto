@@ -6,7 +6,7 @@ class Settings(namedtuple('Settings', ('environment',
                                        'babbling_mode',
                                        'interest_model_class',
                                        'interest_model_config',
-                                       'sensorimotor_model',
+                                       'sensorimotor_model_class',
                                        'sensorimotor_model_config',
                                        'context_mode'))):
     @property
@@ -16,7 +16,7 @@ class Settings(namedtuple('Settings', ('environment',
 
 def make_settings(environment,
                   babbling_mode,
-                  interest_model_class, sensorimotor_model,
+                  interest_model_class, sensorimotor_model_class,
                   interest_model_config='default',
                   sensorimotor_model_config='default',
                   context_mode=None):
@@ -24,7 +24,7 @@ def make_settings(environment,
     return Settings(environment,
                     babbling_mode,
                     interest_model_class, interest_model_config,
-                    sensorimotor_model, sensorimotor_model_config, context_mode)
+                    sensorimotor_model_class, sensorimotor_model_config, context_mode)
 
 from .experiment import Experiment
 from .pool import ExperimentPool

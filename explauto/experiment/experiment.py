@@ -11,7 +11,6 @@ from ..evaluation import Evaluation
 
 from ..agent import Agent
 from .log import ExperimentLog
-from ..sensorimotor_model import sensorimotor_models
 from ..environment.context_environment import ContextEnvironment
 
 
@@ -174,7 +173,6 @@ class Experiment(Observer):
         else:
             env = ContextEnvironment(settings.environment, settings.context_mode)
 
-        sm_cls, sm_configs = sensorimotor_models[settings.sensorimotor_model]
 
         babbling = settings.babbling_mode
         if babbling not in ['goal', 'motor']:
@@ -185,11 +183,11 @@ class Experiment(Observer):
 
         if settings.context_mode is None:
             agent = Agent.from_classes(settings.interest_model_class,settings.interest_model_config, expl_dims,
-                          sm_cls, sm_configs[settings.sensorimotor_model_config], inf_dims,
+                                       settings.sensorimotor_model_class, settings.sensorimotor_model_config, inf_dims,
                           env.conf.m_mins, env.conf.m_maxs, env.conf.s_mins, env.conf.s_maxs)
         else:
             agent = Agent.from_classes(settings.interest_model_class,settings.settings.interest_model_config, expl_dims,
-                          sm_cls, sm_configs[settings.sensorimotor_model_config], inf_dims,
+                                       settings.sensorimotor_model_class, settings.sensorimotor_model_config, inf_dims,
                           env.conf.m_mins, env.conf.m_maxs, env.conf.s_mins, env.conf.s_maxs, context_mode=settings.context_mode)
 
         return cls(env, agent, settings.context_mode)

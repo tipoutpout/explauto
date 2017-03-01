@@ -1,31 +1,12 @@
 
 import numpy as np
 
-from . import forward
-fwdclass = {'NN'     : forward.NNForwardModel,
-            'NSNN'   : forward.NSNNForwardModel,
-            'WNN'    : forward.WeightedNNForwardModel,
-            'ES-WNN' : forward.ESWNNForwardModel,
-            'LWLR'   : forward.LWLRForwardModel,
-            'NSLWLR' : forward.NSLWLRForwardModel,
-            'ES-LWLR': forward.ESLWLRForwardModel
-           }
-
 from . import inverse
-invclass = {'NN'       : inverse.NNInverseModel,
-            'NSNN'     : inverse.NSNNInverseModel,
-            'WNN'      : inverse.WeightedNNInverseModel,
-            'ES-WNN'   : inverse.ESWNNInverseModel,
-            'BFGS'     : inverse.BFGSInverseModel,
-            'L-BFGS-B' : inverse.BFGSInverseModel,
-            'COBYLA'   : inverse.COBYLAInverseModel,
-            'CMAES'    : inverse.CMAESInverseModel,
-            'Jacobian' : inverse.JacobianInverseModel
-           }
+from . import forward
 
 
 class Learner(object):
-    def __init__(self, Mfeats, Sfeats, Mbounds, fwd='LWLR', inv='L-BFGS-B', **kwargs):
+    def __init__(self, Mfeats, Sfeats, Mbounds, fwd=forward.LWLRForwardModel, inv= inverse.BFGSInverseModel, **kwargs):
         """
 
             :arg Mfeats:  the motor features (tuple of int)
@@ -37,8 +18,8 @@ class Learner(object):
         self.Mfeats  = Mfeats
         self.Sfeats  = Sfeats
         self.Mbounds = Mbounds
-        fmodel = fwdclass[fwd](len(Mfeats), len(Sfeats), **kwargs)
-        self.imodel = invclass[inv](dim_x=len(Mfeats), dim_y=len(Sfeats), fmodel=fmodel, constraints=Mbounds, **kwargs)
+        fmodel = fwd(len(Mfeats), len(Sfeats), **kwargs)
+        self.imodel = inv(dim_x=len(Mfeats), dim_y=len(Sfeats), fmodel=fmodel, constraints=Mbounds, **kwargs)
 
     # Interface
 

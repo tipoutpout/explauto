@@ -1,7 +1,5 @@
 from abc import ABCMeta, abstractmethod
 
-from . import sensorimotor_models
-
 
 class SensorimotorModel(object):
     """ This abstract class provides the common interface for sensorimotor models. """
@@ -9,11 +7,6 @@ class SensorimotorModel(object):
 
     def __init__(self, conf):
         self.conf = conf
-
-    @classmethod
-    def from_configuration(cls, conf, sm_name, config_name='default'):
-        sm_cls, sm_configs = sensorimotor_models[sm_name]
-        return sm_cls(conf, **sm_configs[config_name])
 
     @abstractmethod
     def infer(self, in_dims, out_dims, x):
