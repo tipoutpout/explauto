@@ -186,7 +186,7 @@ class Experiment(Observer):
                                        settings.sensorimotor_model_class, settings.sensorimotor_model_config, inf_dims,
                           env.conf.m_mins, env.conf.m_maxs, env.conf.s_mins, env.conf.s_maxs)
         else:
-            agent = Agent.from_classes(settings.interest_model_class,settings.settings.interest_model_config, expl_dims,
+            agent = Agent.from_classes(settings.interest_model_class,settings.interest_model_config, expl_dims,
                                        settings.sensorimotor_model_class, settings.sensorimotor_model_config, inf_dims,
                           env.conf.m_mins, env.conf.m_maxs, env.conf.s_mins, env.conf.s_maxs, context_mode=settings.context_mode)
 

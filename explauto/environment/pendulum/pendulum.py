@@ -1,12 +1,11 @@
+from copy import copy
 from numpy import pi, array, cos, sin
 from numpy import random
-from copy import copy
-
 import simple_lip
-
 from ..environment import Environment
-from ...utils.utils import bounds_min_max
 from ...models.motor_primitive import BasisFunctions
+from ...utils.utils import bounds_min_max
+
 
 
 class PendulumEnvironment(Environment):

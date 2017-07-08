@@ -1,5 +1,4 @@
 from numpy.random import randint
-
 from ..environment import Environment
 
 

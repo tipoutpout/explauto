@@ -1,6 +1,5 @@
 
 import numpy as np
-
 from explauto.environment.environment import Environment
 from ..utils import bounds_min_max
 from ..utils import rand_bounds

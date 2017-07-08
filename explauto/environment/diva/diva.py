@@ -1,9 +1,9 @@
-import os
-import pymatlab
-from numpy import array, hstack
 
+import pymatlab
+from numpy import array
 from ..environment import Environment
 from ...utils import bounds_min_max
+
 
 class DivaSynth:
     def __init__(self, sample_rate=11025):

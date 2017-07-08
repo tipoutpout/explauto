@@ -1,14 +1,12 @@
-import shutil
 import os
-
-from numpy import pi, array, random, hstack, ones, zeros
+import shutil
 from matplotlib.pyplot import savefig, clf, axes
-
+from numpy import pi, array, random, hstack, ones, zeros
 import simulation
-
 from ..environment import Environment
-from ...utils.utils import bounds_min_max
 from ...models.motor_primitive import BasisFunctions
+from ...utils.utils import bounds_min_max
+
 
 
 class NPendulumEnvironment(Environment):

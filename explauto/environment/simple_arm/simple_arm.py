@@ -1,7 +1,7 @@
 import numpy as np
-from numpy import array, pi, sqrt, cos, sin, linspace, zeros, random
 from ..environment import Environment
 from ...utils import bounds_min_max
+
 
 
 def forward(angles, lengths):

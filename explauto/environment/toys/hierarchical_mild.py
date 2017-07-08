@@ -1,7 +1,7 @@
-from numpy.random import rand
 from functools import partial
-
+from numpy.random import rand
 from ..environment import Environment
+
 
 
 f = lambda n, temp: 1./(1. + n / temp)

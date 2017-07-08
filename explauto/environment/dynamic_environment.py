@@ -1,10 +1,9 @@
 import numpy as np
-from matplotlib import animation, rc
-from IPython.display import HTML
-
+from explauto.environment.environment import Environment
+from matplotlib import animation
 from explauto.models.dmp import DmpPrimitive
 from explauto.utils.utils import bounds_min_max
-from explauto.environment.environment import Environment
+
 
 
 class DynamicEnvironment(Environment):
